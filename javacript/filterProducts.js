@@ -44,16 +44,31 @@ function printCards(arrayOfProducts, idSelector) {
 // Función para crear una tarjeta de producto
 function createCard(product) {
     return `
-        <a href="/details.html" class="product-card">
+        <a href="./details.html?id=${product.id}" class="product-card">
             <img class="product-img" src="${product.images[0]}" alt="${product.title}">
             <div class="product-info">
                 <span class="product-title">${product.title}</span>
                 <span class="product-description">${product.description}</span>
                 <div class="product-price-block">
-                    <span class="product-price">${product.price}</span>
-                    <span class="product-discount">${product.discount}</span>
+                    <span class="product-price">$${product.price}</span>
+                    <span class="product-discount">${product.discount ? product.discount + '%' : ''}</span>
                 </div>
             </div>
         </a>
     `;
 }
+
+
+
+// Obtener la query de la URL
+const query = location.search;
+
+// Crear un objeto URLSearchParams
+const params = new URLSearchParams(query);
+
+// Obtener el valor del parámetro 'id'
+const id = params.get('id');
+
+// Imprimir el id por consola
+console.log("ID del producto:", id);
+
